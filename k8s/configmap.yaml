@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: cricket-config
+
+data:
+  API_URL: "https://jsonplaceholder.typicode.com/todos/1"
+  BUCKET_NAME: "cricket-data-kmohan"

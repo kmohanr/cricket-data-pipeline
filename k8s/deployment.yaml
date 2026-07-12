@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: cricket-pipeline
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: cricket-pipeline
+
+  template:
+    metadata:
+      labels:
+        app: cricket-pipeline
+
+    spec:
+      containers:
+      - name: cricket-pipeline
+
+        image: cricket-pipeline:v1
+
+        imagePullPolicy: Never
+
+        ports:
+        - containerPort: 8080
