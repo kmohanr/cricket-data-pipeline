@@ -3,6 +3,7 @@ kind: Deployment
 
 metadata:
   name: cricket-pipeline
+  namespace: cricket
 
 spec:
   replicas: 2
@@ -12,17 +13,23 @@ spec:
       app: cricket-pipeline
 
   template:
+
     metadata:
       labels:
         app: cricket-pipeline
 
     spec:
       containers:
+
       - name: cricket-pipeline
 
-        image: cricket-pipeline:v1
+        image: kmohanr72/cricket-pipeline:v1
 
-        imagePullPolicy: Never
+        imagePullPolicy: Always
 
-        ports:
-        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: cricket-config
+
+        - secretRef:
+            name: cricket-secret

@@ -3,14 +3,17 @@ kind: Service
 
 metadata:
   name: cricket-service
+  namespace: cricket
 
 spec:
+
   selector:
     app: cricket-pipeline
 
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
+
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
 
   type: ClusterIP

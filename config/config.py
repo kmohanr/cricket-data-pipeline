@@ -1,5 +1,13 @@
-BUCKET_NAME = "cricket-data-kmohan"
+import os
 
-API_URL = "https://jsonplaceholder.typicode.com/todos/1"
+BUCKET_NAME = os.getenv("BUCKET_NAME", "cricket-data-kmohan")
 
-DATA_PATH = "/app/data"
+API_URL = os.getenv(
+    "API_URL",
+    "https://jsonplaceholder.typicode.com/todos/1"
+)
+
+DATA_PATH = os.getenv(
+    "DATA_PATH",
+    "/app/data"
+)
