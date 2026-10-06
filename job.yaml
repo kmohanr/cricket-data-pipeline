@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+
+metadata:
+  name: file-creator-job
+
+spec:
+  completions: 2
+  parallelism: 2
+  backoffLimit: 1
+
+  # Delete the Job 48 hours after it finishes
+  ttlSecondsAfterFinished: 172800
+
+  template:
+    metadata:
+      labels:
+        app: file-creator
+
+    spec:
+      restartPolicy: Never
+
+      containers:
+        - name: file-creator
+          image: busybox:1.36
+
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Hello from Kubernetes Job" > /tmp/file1.txt
+              echo "This is file number 2" > /tmp/file2.txt
+              echo "This is file number 3" > /tmp/file3.txt
+
+              echo "Files created:"
+              ls -l /tmp/*.txt
+
+              echo "Job completed successfully"
