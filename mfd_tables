@@ -3,4 +3,13 @@ Table Name:
 source Name:
 Dir:
 Splunk:
-Values:
+Values
+
+#----------------------------------
+Rehat table 
+Table Name:
+source Name:
+Dir:
+Splunk:
+Values
+
