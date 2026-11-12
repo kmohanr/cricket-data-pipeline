@@ -1,0 +1,41 @@
+{
+  "environment": "PROD_WALLETPAY",
+  "splunk_log_file": "logs/prod/splunk/airflow_lob_pipeline.log",
+  "grafana_metrics_file": "logs/prod/grafana_metrics/walletpay_pipelines.prom",
+  "oracle_sim_db": "data/prod/oracle_walletpay_prod.db",
+  "incident_dir": "logs/prod/incidents",
+  "pipelines": [
+    {
+      "lob": "WALLET_TXN",
+      "dag_id": "dag_wallet_hourly_txn_load",
+      "frequency": "hourly",
+      "target_table": "WALLET_CORE.FACT_HOURLY_TXN",
+      "sla_seconds": 900,
+      "min_expected_rows": 500
+    },
+    {
+      "lob": "MERCHANT_SETTLEMENT",
+      "dag_id": "dag_merchant_daily_settlement",
+      "frequency": "daily",
+      "target_table": "SETTLEMENT_CORE.FACT_DAILY_SETTLE",
+      "sla_seconds": 3600,
+      "min_expected_rows": 2000
+    },
+    {
+      "lob": "COMPLIANCE_AUDIT",
+      "dag_id": "dag_compliance_weekly_recon",
+      "frequency": "weekly",
+      "target_table": "AUDIT_CORE.AGG_WEEKLY_RECON",
+      "sla_seconds": 7200,
+      "min_expected_rows": 1000
+    },
+    {
+      "lob": "FINANCE_LEDGER",
+      "dag_id": "dag_finance_monthly_close",
+      "frequency": "monthly",
+      "target_table": "FINANCE_CORE.SUM_MONTHLY_LEDGER",
+      "sla_seconds": 14400,
+      "min_expected_rows": 5000
+    }
+  ]
+}
